@@ -1,9 +1,9 @@
 class MetadataService
-  METADATA_FILE = "./metadata.yml"
+  METADATA_FILE = "metadata.yml"
 
   class << self    
     def fetch(url)
-      puts "url: #{url}"
+      puts File.read(METADATA_FILE)
       if File.exists?(METADATA_FILE)
         metadata = YAML.load_file(METADATA_FILE)["#{url}".to_sym]
 
@@ -28,8 +28,9 @@ class MetadataService
   end
 
   def update
-    data = YAML.load_file(METADATA_FILE)
+    data = File.exists?(METADATA_FILE) ? YAML.load_file(METADATA_FILE) : {}
     new_data = data.merge(webpage_metadata)
+
     File.write(METADATA_FILE, new_data.to_yaml)
   end
 
