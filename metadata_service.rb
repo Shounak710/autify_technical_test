@@ -3,7 +3,7 @@ class MetadataService
 
   class << self    
     def fetch(url)
-      puts File.read(METADATA_FILE)
+      # puts File.read(METADATA_FILE)
       if File.exists?(METADATA_FILE)
         metadata = YAML.load_file(METADATA_FILE)["#{url}".to_sym]
 
